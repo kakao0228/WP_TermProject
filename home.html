@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
     <title>Travel</title>
   </head>
   <body>
     <header>
+      <!--아래로 최상단 바 // 로고, 이름, 로그인, 회원가입 버튼-->
       <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-          <img src="#" width="30" height="30" class="d-inline-block align-top" alt="logo">
+        <a class="navbar-brand" href = "#">
+          <img src = "pic/logo/logo.png" height = 50 width = 50 class="d-inline-block align-top" alt="Travel Logo">
           Travel
         </a>
+        <form class="form-inline">
+          <button class="btn btn-outline-success" type="button">Log-in</button>
+          <div id = "hidden">"   "</div>
+          <button class="btn btn-outline-success" type="button">Sign-in</button>          
+        </form>
       </nav>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <!--아래로 메뉴-->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light center">
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
