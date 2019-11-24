@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <link rel="stylesheet" type="text/css" href="css/privacy.css">
     <link rel="stylesheet" type="text/css" href="css/header.css">
     <title>Travel</title>
   </head>
@@ -53,16 +53,16 @@
         </div>
       </nav>
     </header>
-    <div class="jumbotron jumbotron-fluid">
+    <!--이 이하로 개인 신상정보 표시 // pug에서는 db정보 받아서 처리-->
+    <div class="media">
       <div class="container">
-        <div class="row justify-content-center">
-          <h1 class="display-4">당신의 여행지를 입력하세요!</h1>
-        </div>
-        <div class="row justify-content-center">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+        <div class="media-body row justify-content-center">
+          <img src="..." class="mr-3" alt="user image">
+          <ul class="none">
+            <li>이름: 문선규</li>
+            <li>전화번호: 010-1111-1111</li>
+            <li>e-mail: seongyumoon@kakao.com</li>
+          </ul>
         </div>
       </div>
     </div>
