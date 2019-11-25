@@ -1,3 +1,7 @@
 ul.none > li {
   list-style-type: none;
 }
+
+.privacy {
+  margin-top: 80px;
+}

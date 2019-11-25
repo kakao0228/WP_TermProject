@@ -56,7 +56,7 @@
     <!--이 이하로 개인 신상정보 표시 // pug에서는 db정보 받아서 처리-->
     <div class="media">
       <div class="container">
-        <div class="media-body row justify-content-center">
+        <div class="media-body row justify-content-center privacy">
           <img src="..." class="mr-3" alt="user image">
           <ul class="none">
             <li>이름: 문선규</li>
@@ -64,10 +64,39 @@
             <li>e-mail: seongyumoon@kakao.com</li>
           </ul>
         </div>
+        <!--개인정보 수정 버튼-->
+        <div class="row justify-content-end">
+          <div class="col-4">
+            <a href="#" class="btn btn-primary" role="button" aria-pressed="true">Edit Profile</a>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!--Bootstrap-->
+    <hr>
+    <!--예약 내역 표기 // 마찬가지로 pug에서 db정보 받아 처리-->
+    <div class="media">
+        <div class="container">
+          <div class="media-body row justify-content-center privacy">
+              <img src="..." class="align-self-center mr-3" alt="...">
+              <div class="media-body">
+                <h5 class="mt-0">예약한 상품명 1️⃣</h5>
+                <p>예약한 상품에 대한 간략한 설명</p>
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="media">
+        <div class="container">
+          <div class="media-body row justify-content-center privacy">
+              <img src="..." class="align-self-center mr-3" alt="...">
+              <div class="media-body">
+                <h5 class="mt-0">예약한 상품명 2️⃣</h5>
+                <p>예약한 상품에 대한 간략한 설명</p>
+              </div>
+          </div>
+        </div>
+    </div>
+    <!--Bootstrap JS-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
