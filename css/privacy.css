@@ -5,3 +5,8 @@ ul.none > li {
 .privacy {
   margin-top: 80px;
 }
+
+.privacy > img {
+  height: 150px;
+  width: 150px;
+}
