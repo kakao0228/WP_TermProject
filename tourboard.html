@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/tourboard.css">
+  <link rel="stylesheet" type="text/css" href="css/header.css">
+  <title>Travel</title>
+</head>
+<body>
+  <!--header tag는 pug에서 layout이 될 부분-->
+  <header>
+    <!--아래로 최상단 바 // 로고, 이름, 로그인, 회원가입 버튼-->
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href = "home.html">
+        <img src = "pic/logo/logo.png" height = 50 width = 50 class="d-inline-block align-top" alt="Travel Logo">
+        Travel
+      </a>
+      <form class="form-inline">
+        <a href="login.html" class="btn btn-outline-success" role="button" aria-pressed="true">Log-in</a>
+        <div id = "hidden">"   "</div>
+        <a href="signin.html" class="btn btn-outline-success" role="button" aria-pressed="true">Sign-in</a>         
+      </form>
+    </nav>
+    <!--아래로 메뉴-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light center">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">동남아</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">중국/한국</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">호주/뉴질랜드</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">서유럽</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">동유럽</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">남유럽/지중해</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">전체</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!--테마 내부에서 검색할 수 있는 기능-->
+  <div class="floatr">
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+  <div class="clear"></div>
+  <!--상품 목록-->
+  <div class="container">
+    <div class="row justify-content-start">
+      <div class="col-lx-3">
+        <div class="card mb-3" style="max-width: 1200px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="..." class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>
