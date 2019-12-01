@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .container.login
+    row.justify-content-center
+      .col-4
+        form(action='/login', method='POST')
+          .form-group
+            label(for="exampleInputEmail1") ID
+            input.form-control#exampleInputEmail1(type="email" aria-describedby="emailHelp" placeholder="enter your ID")
+          div.form-group
+            label(for="exampleInputPassword1") Password
+            input.form-control#exampleInputPassword1(type="password" placeholder="enter your password")
+          div.form-group.form-check
+            input.form-check-input#exampleCheck1(type="checkbox")
+            label.form-check-label(for="exampleCheck1") Remind Me
+          div.row.justify-content-end.logbutton
+            div.col-4
+              button.btn.btn-outline-primary(type="submit") Submit
+          button.btn.btn-primary.btn-lg.btn-block(type="button") Connect with Facebook
+        div.row.justify-content-end
+          div.col-9
+            | 아직 회원이 아니신가요?
+            a(href="users/signup") Sign up

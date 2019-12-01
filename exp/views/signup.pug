@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  .container
+    h3 회원가입
+    .row.justify-content-center
+      .col-lx-8
+        form(action='/signup', method='POST')
+          .form-group
+            label(for="exampleFormControlInput1") 이름
+            input.form-control#exampleFormControlInput1(
+              type="text", name="name"
+              placeholder="이름을 입력하세요"
+            )
+          .form-group
+            label(for="exampleFormControlInput1") ID
+            input.form-control#exampleFormControlInput1(
+              type="Text", name="id",
+              placeholder="ID를 입력하세요."
+            )
+          .form-group
+            label(for="exampleFormControlInput1") PW
+            input.form-group#exampleFormControlInput1(
+              type="password", name="password",
+              placeholder="Password를 입력하세요."
+            )
+          .form-group
+            label(for="exampleFormControlInput1") PW 확인
+            input.form-group#exampleFormControlInput1(
+              type="password", name="password_confirmation",
+              placeholder="Password를 한번 더 입력하세요."
+            )
+          .form-group
+            label(for="exampleFormControlInput1") e-mail
+            input.form-group#exampleFormControlInput1(
+              type="email", name="email",
+              placeholder="e-mail을 입력하세요."
+            )
+          .form-group
+            label(for="exampleFormControlInput1") 전화번호
+            input.form-group#exampleFormControlInput1(
+              type="text", name="phone"
+              placeholder="전화번호를 입력하세요."
+            )
+          .row.justify-content-end
+            .col-7
+              button.btn.btn-primary(type='submit') 회원가입

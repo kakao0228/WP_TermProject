@@ -1,8 +1,27 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+.hidden {
+  visibility: hidden; }
 
-a {
-  color: #00B7FF; }
+.login {
+  margin-top: 100px; }
+
+.logbutton {
+  margin-bottom: 20px; }
+
+ul.none > li {
+  list-style-type: none; }
+
+.privacy {
+  margin-top: 80px; }
+
+.privacy > img {
+  height: 150px;
+  width: 150px; }
+
+.floatr {
+  float: right;
+  padding: 20px; }
+
+.clear {
+  clear: both; }
 
 /*# sourceMappingURL=style.css.map */

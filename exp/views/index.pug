@@ -1,5 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .jumbotron.jumbotron-fluid
+    .container
+      .row.justify-content-center
+        h1.display-4 당신의 여행지를 입력하세요!
+        .hidden ssss
+        .row.justify-content-center
+          form.form-inline.my-2.my-lg-0
+            input.form-control.mr-sm-2(type="search" placeholder="Search" aria-label="Search")
+            button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Search
