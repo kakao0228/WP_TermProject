@@ -13,12 +13,19 @@ html(lang="ko")
   body
     header
       nav.navbar.navbar-light.bg-light
-        a.navbar-brand(href = "/home")
+        a.navbar-brand(href = "/")
           | #[img.d-inline-block.align-top(src ="/images/logo/logo.png" height = 50 width = 50 alt="Travel Logo")] Travel
-        form.form-inline
-          a.btn.btn-outline-success(href="users/login" role="button" aria-pressed="true") Log-in
-          .hidden aaa
-          a.btn.btn-outline-success(href="users/new" role="button" aria-pressed="true") Sign-up
+        if (!currentUser)
+          form.form-inline
+            a.btn.btn-outline-success(href="/login" role="button" aria-pressed="true") Log-in
+            .hidden aaa
+            a.btn.btn-outline-success(href="users/new" role="button" aria-pressed="true") Sign-up
+        else
+          form.form-inline
+            a.btn.btn-outline-success(href=`users/${currentUser.id}` role="button" aria-pressed="true") Profile
+            .hidden aaa
+            a.btn.btn-outline-success(href="/logout" role="button" aria-pressed="true") Log-out
+
       nav.navbar.navbar-expand-lg.navbar-light.bg-light.center
         .collapse.navbar-collapse#navbarNav
           ul.navbar-nav
@@ -36,5 +43,14 @@ html(lang="ko")
               a.nav-link(href="#") 남유럽/지중해            
             li.nav-item
               a.nav-link(href="#") 전체
+    block hero-unit
+    if flashMessages
+      each texts, type in flashMessages
+        .container
+          .alert.alert-dissmissible.fade.show(class=`alert-${type}`)
+            each msg in texts
+              | #{msg}
+            button.close(type='button', data-dissmiss='alert', aria-label='close')
+              span(aria-hidden='true') &times;
     block content
 

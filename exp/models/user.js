@@ -9,6 +9,7 @@ var schema = new Schema({
   email: {type: String, required: true, index: true, unique: true, trim: true},
   phoneNum: {type: String, required: true, trim: true},
   facebook: {id: String, token: String, photo: String},
+  type: {type: String, required: true},
   createdAt: {type: Date, default: Date.now}
 }, {
   toJSON: { virtuals: true},

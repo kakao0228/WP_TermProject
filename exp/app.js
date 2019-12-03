@@ -33,7 +33,7 @@ app.locals.querystring = require('querystring');
 // mongodb connect
 //=======================================================
 mongoose.Promise = global.Promise; // ES6 Native Promise를 mongoose에서 사용한다.
-const connStr = 'mongodb+srv://user1:<password>@cluster0-5vnqq.mongodb.net/test?retryWrites=true&w=majority';
+const connStr = 'mongodb+srv://user1:seongyu0228@cluster0-5vnqq.mongodb.net/test?retryWrites=true&w=majority';
 
 mongoose.connect(connStr, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 mongoose.connection.on('error', console.error);

@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const User = require('../models/user')
+const router = express.Router();
 const catchErrors = require('../lib/async-error.js');
 
 function needAuth(req, res, next) {
@@ -52,21 +53,75 @@ function validateForm(form, options) {
   return null;
 }
 
+/* GET users listing. */
+//유저 리스트
+router.get('/', needAuth, catchErrors(async (req, res, next) => {
+  const users = await User.find({});
+  //링크 수정필요
+  res.render('/', {users: users});
+}));
+
+//회원가입 페이지
 router.get('/new', function(req, res, next) {
-  res.render('signup', { title: 'Travel'});
+  res.render('signup', { title: 'Travel', message: req.flash()});
 });
 
-router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Travel'});
-});
+// 유저 정보 수정 창
+router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  res.render('users/edit', {user: user});
+}));
 
+//유저 정보 수정
+router.put('/:id', needAuth, catchErrors(async (req, res, next) => {
+  const err = validateForm(req.body);
+  if (err) {
+    req.flash('danger', err);
+    return res.redirect('back');
+  }
+
+  const user = await User.findById({_id: req.params.id});
+  if (!user) {
+    req.flash('danger', 'Not exist user.');
+    return res.redirect('back');
+  }
+
+  if (!await user.validatePassword(req.body.current_password)) {
+    req.flash('danger', 'Current password invalid.');
+    return res.redirect('back');
+  }
+
+  user.name = req.body.name;
+  user.email = req.body.email;
+  if (req.body.password) {
+    user.password = await user.generateHash(req.body.password);
+  }
+  await user.save();
+  req.flash('success', 'Updated successfully.');
+  res.redirect('/users');
+}));
+
+//회원정보 삭제
+router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
+  const user = await User.findOneAndRemove({_id: req.params.id});
+  req.flash('success', 'Deleted Successfully.');
+  res.redirect('/users');
+}));
+
+//유저 상세정보
+router.get('/:id', catchErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  res.render('users/show', {user: user});
+}));
+
+//회원가입 서버에 보내기
 router.post('/', catchErrors(async (req, res, next) => {
   var err = validateForm(req.body, {needPassword: true});
   if (err) {
     req.flash('danger', err);
     return res.redirect('back');
   }
-  var user = await User.findOne({email: req.body.email});
+  var user = await User.findOne({id: req.body.id});
   console.log('USER???', user);
   if (user) {
     req.flash('danger', 'Email address already exists.');
@@ -74,7 +129,10 @@ router.post('/', catchErrors(async (req, res, next) => {
   }
   user = new User({
     name: req.body.name,
+    ID: req.body.id,
     email: req.body.email,
+    phoneNum: req.body.phone,
+    type: req.body.type
   });
   user.password = await user.generateHash(req.body.password);
   await user.save();

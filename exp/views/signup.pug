@@ -5,43 +5,51 @@ block content
     h3 회원가입
     .row.justify-content-center
       .col-lx-8
-        form(action='/signup', method='POST')
+        form(action='/users', method='POST')
           .form-group
             label(for="exampleFormControlInput1") 이름
-            input.form-control#exampleFormControlInput1(
-              type="text", name="name"
+            input.form-control(
+              type="text", id="name", name="name",
               placeholder="이름을 입력하세요"
             )
           .form-group
-            label(for="exampleFormControlInput1") ID
-            input.form-control#exampleFormControlInput1(
-              type="Text", name="id",
+            label(for="id") ID
+            input.form-control(
+              type="Text", id="id", name="id",
               placeholder="ID를 입력하세요."
             )
           .form-group
-            label(for="exampleFormControlInput1") PW
-            input.form-group#exampleFormControlInput1(
-              type="password", name="password",
+            label(for="password") PW
+            input.form-group(
+              type="password", id="password", name="password",
               placeholder="Password를 입력하세요."
             )
           .form-group
-            label(for="exampleFormControlInput1") PW 확인
-            input.form-group#exampleFormControlInput1(
-              type="password", name="password_confirmation",
+            label(for="password-confirmation") PW 확인
+            input.form-group(
+              type="password", id="password-confirmation" name="password_confirmation",
               placeholder="Password를 한번 더 입력하세요."
             )
           .form-group
-            label(for="exampleFormControlInput1") e-mail
-            input.form-group#exampleFormControlInput1(
-              type="email", name="email",
+            label(for="email") e-mail
+            input.form-group(
+              type="email", id="email", name="email",
               placeholder="e-mail을 입력하세요."
             )
           .form-group
-            label(for="exampleFormControlInput1") 전화번호
-            input.form-group#exampleFormControlInput1(
-              type="text", name="phone"
+            label(for="phone") 전화번호
+            input.form-group(
+              type="text", id="phone", name="phone",
               placeholder="전화번호를 입력하세요."
             )
+          .form-group
+            label(for="type") 계정 유형
+            .form-check.form-check-inline
+              input.form-check-input(type="radio" name="type" id="inlineRadio1" value="customer")
+              label.form-check-label(for="customer") 고객
+            .form-check.form-check-inline
+              input.form-check-input(type="radio" name="type" id="inlineRadio2" value="guide")
+              label.form-check-label(for="guide") 가이드
           .row.justify-content-end
             .col-7
               button.btn.btn-primary(type='submit') 회원가입
