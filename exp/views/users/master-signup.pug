@@ -1,0 +1,46 @@
+extends ../layout
+
+block content
+  .container
+    h3 회원가입
+    .row.justify-content-center
+      .col-lx-8
+        form(action='/users', method='POST')
+          .form-group
+            label(for="exampleFormControlInput1") 이름
+            input.form-control(
+              type="text", id="name", name="name",
+              placeholder="이름을 입력하세요"
+            )
+          .form-group
+            label(for="email") e-mail
+            input.form-group(
+              type="email", id="email", name="email",
+              placeholder="e-mail을 입력하세요."
+            )
+          .form-group
+            label(for="password") PW
+            input.form-group(
+              type="password", id="password", name="password",
+              placeholder="Password를 입력하세요."
+            )
+          .form-group
+            label(for="password-confirmation") PW 확인
+            input.form-group(
+              type="password", id="password-confirmation" name="password_confirmation",
+              placeholder="Password를 한번 더 입력하세요."
+            )          
+          .form-group
+            label(for="type") 계정 유형
+            .form-check.form-check-inline
+              input.form-check-input(type="radio" name="type" id="inlineRadio1" value="customer")
+              label.form-check-label(for="customer") 고객
+            .form-check.form-check-inline
+              input.form-check-input(type="radio" name="type" id="inlineRadio2" value="guide")
+              label.form-check-label(for="guide") 가이드
+            .form-check.form-check-inline
+              input.form-check-input(type="radio" name="type" id="inlineRadio3" value="master")
+              label.form-check-label(for="guide") 마스터
+          .row.justify-content-end
+            .col-7
+              button.btn.btn-primary(type='submit') 회원가입

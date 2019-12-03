@@ -15,12 +15,8 @@ function needAuth(req, res, next) {
 function validateForm(form, options) {
   var name = form.name || "";
   var email = form.email || "";
-  var id = form.id || "";
-  var phone = form.phone || "";
   name = name.trim();
   email = email.trim();
-  id = id.trim();
-  phone = phone.trim();
 
   if (!name) {
     return 'Name is required.';
@@ -28,14 +24,6 @@ function validateForm(form, options) {
 
   if (!email) {
     return 'Email is required.';
-  }
-
-  if (!id) {
-    return 'ID is required.';
-  }
-
-  if (!phone) {
-    return 'Phone number is required.';
   }
 
   if (!form.password && options.needPassword) {
@@ -57,19 +45,28 @@ function validateForm(form, options) {
 //유저 리스트
 router.get('/', needAuth, catchErrors(async (req, res, next) => {
   const users = await User.find({});
-  //링크 수정필요
-  res.render('/', {users: users});
+  res.render('users/list', {users: users});
 }));
 
 //회원가입 페이지
 router.get('/new', function(req, res, next) {
-  res.render('signup', { title: 'Travel', message: req.flash()});
+  res.render('users/signup', { title: 'Travel', message: req.flash()});
+});
+
+router.get('/masternew', function(req, res, next) {
+  res.render('users/master-signup', { title: 'Travel', message: req.flash()});
 });
 
 // 유저 정보 수정 창
 router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
   res.render('users/edit', {user: user});
+}));
+
+//마스터의 유저 수정창
+router.get('/:id/masteredit', needAuth, catchErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  res.render('users/master-edit', {user: user});
 }));
 
 //유저 정보 수정
@@ -93,25 +90,27 @@ router.put('/:id', needAuth, catchErrors(async (req, res, next) => {
 
   user.name = req.body.name;
   user.email = req.body.email;
+  user.type = req.body.type;
+
   if (req.body.password) {
     user.password = await user.generateHash(req.body.password);
   }
   await user.save();
   req.flash('success', 'Updated successfully.');
-  res.redirect('/users');
+  res.redirect('/');
 }));
 
 //회원정보 삭제
 router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
   const user = await User.findOneAndRemove({_id: req.params.id});
   req.flash('success', 'Deleted Successfully.');
-  res.redirect('/users');
+  res.redirect('/');
 }));
 
 //유저 상세정보
 router.get('/:id', catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  res.render('users/show', {user: user});
+  res.render('users/profile', {user: user});
 }));
 
 //회원가입 서버에 보내기
@@ -121,7 +120,7 @@ router.post('/', catchErrors(async (req, res, next) => {
     req.flash('danger', err);
     return res.redirect('back');
   }
-  var user = await User.findOne({id: req.body.id});
+  var user = await User.findOne({email: req.body.email});
   console.log('USER???', user);
   if (user) {
     req.flash('danger', 'Email address already exists.');
@@ -129,14 +128,12 @@ router.post('/', catchErrors(async (req, res, next) => {
   }
   user = new User({
     name: req.body.name,
-    ID: req.body.id,
     email: req.body.email,
-    phoneNum: req.body.phone,
     type: req.body.type
   });
   user.password = await user.generateHash(req.body.password);
   await user.save();
-  req.flash('success', 'Registered successfully. Please sign in.');
+  req.flash('success', 'Registered successfully. Please log in.');
   res.redirect('/');
 }));
 

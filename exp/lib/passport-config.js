@@ -29,8 +29,8 @@ module.exports = function(passport) {
 
   passport.use(new FacebookStrategy({
     // 이 부분을 여러분 Facebook App의 정보로 수정해야 합니다.
-    clientID : '185081248729582',
-    clientSecret : 'f02d8be90007cf67bd16495033e1b95a',
+    clientID : '1291464274369571',
+    clientSecret : '216cfcd5186321b037f77ad501b13c40',
     callbackURL : 'http://localhost:3000/auth/facebook/callback',
     profileFields : ['email', 'name', 'picture']
   }, async (token, refreshToken, profile, done) => {
@@ -53,6 +53,7 @@ module.exports = function(passport) {
           // 그것도 없다면 새로 만들어야지.
           user = new User({name: name});
           user.email =  email ? email : `__unknown-${user._id}@no-email.com`;
+          user.type = 'customer'
         }
         // facebook id가 없는 사용자는 해당 id를 등록
         user.facebook.id = profile.id;

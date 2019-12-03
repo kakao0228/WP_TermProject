@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block content
   .container
@@ -13,10 +13,10 @@ block content
               placeholder="이름을 입력하세요"
             )
           .form-group
-            label(for="id") ID
-            input.form-control(
-              type="Text", id="id", name="id",
-              placeholder="ID를 입력하세요."
+            label(for="email") e-mail
+            input.form-group(
+              type="email", id="email", name="email",
+              placeholder="e-mail을 입력하세요."
             )
           .form-group
             label(for="password") PW
@@ -29,19 +29,7 @@ block content
             input.form-group(
               type="password", id="password-confirmation" name="password_confirmation",
               placeholder="Password를 한번 더 입력하세요."
-            )
-          .form-group
-            label(for="email") e-mail
-            input.form-group(
-              type="email", id="email", name="email",
-              placeholder="e-mail을 입력하세요."
-            )
-          .form-group
-            label(for="phone") 전화번호
-            input.form-group(
-              type="text", id="phone", name="phone",
-              placeholder="전화번호를 입력하세요."
-            )
+            )          
           .form-group
             label(for="type") 계정 유형
             .form-check.form-check-inline

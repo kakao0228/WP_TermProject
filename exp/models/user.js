@@ -4,12 +4,10 @@ const Schema = mongoose.Schema;
 
 var schema = new Schema({
   name: {type: String, required: true, trim: true},
-  ID: {type: String, required: true, trim: true},
-  password: {type: String},
   email: {type: String, required: true, index: true, unique: true, trim: true},
-  phoneNum: {type: String, required: true, trim: true},
-  facebook: {id: String, token: String, photo: String},
+  password: {type: String},
   type: {type: String, required: true},
+  facebook: {id: String, token: String, photo: String},
   createdAt: {type: Date, default: Date.now}
 }, {
   toJSON: { virtuals: true},

@@ -6,18 +6,18 @@ block content
       .col-4
         form(action='/login', method='POST')
           .form-group
-            label(for="exampleInputEmail1") ID
-            input.form-control#exampleInputEmail1(type="text" placeholder="enter your ID")
+            label(for="exampleInputEmail1") E-mail
+            input.form-control(type='email', id='email', name='email', placeholder="enter your Email")
           div.form-group
             label(for="exampleInputPassword1") Password
-            input.form-control#exampleInputPassword1(type="password" placeholder="enter your password")
-          div.form-group.form-check
-            input.form-check-input#exampleCheck1(type="checkbox")
-            label.form-check-label(for="exampleCheck1") Remind Me
+            input.form-control(type='password', id='password', name='password', placeholder="enter your password")
           div.row.justify-content-end.logbutton
             div.col-4
               button.btn.btn-outline-primary(type="submit") Submit
-          button.btn.btn-primary.btn-lg.btn-block(type="button") Connect with Facebook
+          a.btn.btn-primary.btn-lg.btn-block(href="/auth/facebook")
+            i.fa.fa-facebook.fa-lg
+            | &nbsp;
+            | Login With Facebook
         div.row.justify-content-end
           div.col-9
             | 아직 회원이 아니신가요?
