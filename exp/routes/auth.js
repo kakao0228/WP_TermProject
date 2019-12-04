@@ -3,7 +3,7 @@ module.exports = (app, passport) => {
     res.render('login');
   });
 
-  app.post('/login', passport.authenticate('local-login', {
+  app.post('/login', passport.authenticate('local-signin', {
     successRedirect : '/', // redirect to the secure profile section
     failureRedirect : '/login', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
