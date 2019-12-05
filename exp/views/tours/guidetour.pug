@@ -1,0 +1,50 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title= tour.title
+
+    .question.show
+      .content= tour.content
+        .row
+          .col-sm
+            .numbers.
+              #[span.number.num-comments= tour.numComments] comment,
+              #[span.number.num-reads= tour.numReads] reads
+          .col-sm
+            .guide
+              | asked on #{moment(tour.createdAt).format('YYYY-MM-DD')}
+              if tour.guide
+                | 
+                | by #[a(href=`/users/${tour.guide.id}`)= tour.guide.name] 
+      .buttons
+        if currentUser
+          if tour.guide && tour.guide.id == currentUser.id || currentUser.type == "master"
+            | 
+            a.btn.btn-outline-secondary(href=`/tours/${tour.id}/edit`) Edit
+            | 
+            a.btn.btn-outline-danger.need-confirm-btn(href=`/tours/${tour.id}?_method=delete`) Delete
+      
+    if tour.numComments > 0
+      hr
+      h3 #{tour.numcoments} Answer(s)
+      .answers.show
+        each comment in comments
+          .comment.card
+            .card-body
+              .content= comment.content
+            .row.card-body
+              .col-sm
+              .col-sm.text-right
+                .customer
+                  | Commented on #{moment(comment.createdAt).format('YYYY-MM-DD')}
+                  if comment.customer
+                    | 
+                    | by #[a(href=`/users/${comment.customer.id}`)= comment.customer.name]
+
+    if currentUser
+      form(action=`/tours/${tour.id}/comments`, method='POST')
+        .form-group
+          label(for='comment') Your Comment
+          textarea.form-control(name="content", rows="3")
+        button.btn.btn-primary(type="submit") Post Your Comment

@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title New Question
+    form(action="/tours", method="POST")
+      .form-group
+        label(for="title") Title
+        input.form-control(type="text", name="title", placeholder="What's your guide tour name?", value=tour.title)
+      .form-group
+        label(for="tourDate") Tour Date
+        input.form-control(type="text", name="tourDate", placeholder="When is your guide tour date?", value=tour.tourDate)
+      .form-group
+        label(for="simpleContent") Simple Expression Your Guide Tour
+        input.form-control(type="text", name="simpleContent", placeholder="Simple Expression for user", value=tour.simpleContent)
+      .form-group
+        label(for="pricePer") Price per Person
+        input.form-control(type="text", name="pricePer", placeholder="How much is your guide tour fee?", value=tour.pricePer)
+      .form-group
+        label(for="startTime") Tour Start Time
+        input.form-control(type="text", name="startTime", placeholder="When you start your tour?", value=tour.startTime)
+      //- .form-group
+      //-   label(for="allTourList") Tour List
+      //-   input.form-control(type="text", name="allTourList", placeholder="What's your guide tour list?", value=tour.allTourList)
+      //- .form-group
+      //-   label(for="includeTour") Include
+      //-   input.form-control(type="text", name="includeTour", placeholder="What's your guide tour includes?", value=tour.includeTour)
+      //- .form-group
+      //-   label(for="notInclude") Not Include
+      //-   input.form-control(type="text", name="notInclude", placeholder="What's your guide tour NOT includes?", value=tour.notInclude)
+      .form-group
+        label(for="tourExpression") Guide Tour
+        textarea.form-control(name="tourExpression", rows="10")= tour.tourExpression
+      button.btn.btn-outline-primary(type="submit") Post Your Guide Tour
