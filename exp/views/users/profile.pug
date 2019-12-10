@@ -18,7 +18,35 @@ block content
           img.img-fluid.rounded-circle(src= user.facebook.photo)
 
     hr
-    if user.type == 'master'
+    // 고객인 경우 예약내역
+    //- if user.type == 'customer'
+    //-   p 예약 목록
+    //-   for tours in tour
+    //-     dl.row
+    //-       dt.col-sm-3 Title
+    //-       dd.col-sm-9  
+    //-         a(href=`/tours/${tours.id}`)= tours.title
+    //-       dt.col-sm-3 Simple Expression
+    //-       dd.col-sm-9  
+    //-         p= tours.simpleContent
+
+
+    // 가이드인 경우 개설한 상품 내역
+    if user.type == 'guide' || 'master'
+    p 상품 목록
+      for tours in tour
+        dl.row
+          dt.col-sm-3 Title
+          dd.col-sm-9  
+            a(href=`/tours/${tours.id}`)= tours.title
+          dt.col-sm-3 Simple Expression
+          dd.col-sm-9  
+            p= tours.simpleContent
+          
+
+
+    hr
+    if currentUser.type == 'master'
       p
         a.btn.btn-outline-secondary(href='/users/') List
         | 
@@ -26,7 +54,8 @@ block content
         | 
         a.btn.btn-outline-danger.need-confirm-btn(href=`/users/${user._id}?_method=DELETE`) Delete
     else
-       p
-        a.btn.btn-outline-primary(href=`/users/${user._id}/edit`) Edit
-        | 
-        a.btn.btn-outline-danger.need-confirm-btn(href=`/users/${user._id}?_method=DELETE`) Delete
+      if user.id == currentUser.id
+        p
+          a.btn.btn-outline-primary(href=`/users/${user._id}/edit`) Edit
+          | 
+          a.btn.btn-outline-danger.need-confirm-btn(href=`/users/${user._id}?_method=DELETE`) Delete

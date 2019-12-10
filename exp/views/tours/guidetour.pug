@@ -13,10 +13,15 @@ block content
               #[span.number.num-reads= tour.numReads] reads
           .col-sm
             .guide
-              | asked on #{moment(tour.createdAt).format('YYYY-MM-DD')}
+              | posted #{moment(tour.createdAt).format('YYYY-MM-DD')}
               if tour.guide
                 | 
                 | by #[a(href=`/users/${tour.guide.id}`)= tour.guide.name] 
+
+      if currentUser
+        if currentUser.type == 'customer'
+          //예약폼 그냥 안에다 때려 넣자
+      
       .buttons
         if currentUser
           if tour.guide && tour.guide.id == currentUser.id || currentUser.type == "master"
@@ -27,8 +32,8 @@ block content
       
     if tour.numComments > 0
       hr
-      h3 #{tour.numcoments} Answer(s)
-      .answers.show
+      h3 #{tour.numcoments} comment(s)
+      .comments.show
         each comment in comments
           .comment.card
             .card-body

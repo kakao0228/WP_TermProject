@@ -1,5 +1,6 @@
 const express = require('express');
-const User = require('../models/user')
+const User = require('../models/user');
+const Tour = require('../models/tour');
 const router = express.Router();
 const catchErrors = require('../lib/async-error.js');
 
@@ -110,7 +111,9 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 //유저 상세정보
 router.get('/:id', catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  res.render('users/profile', {user: user});
+  const tour = await Tour.find({guide: user.id}).populate('guide');
+  console.log(tour);
+  res.render('users/profile', {user: user, tour: tour});
 }));
 
 //회원가입 서버에 보내기

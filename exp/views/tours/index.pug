@@ -36,6 +36,7 @@ block content
             hr
 
       +paginate(tours, '/tours', query)
-
-    if currentUser.type == "guide" || "master"
-      a.btn.btn-primary(href='/tours/new') Add Your Tour
+      
+    if currentUser
+      if currentUser.type == "guide" || "master"
+        a.btn.btn-primary(href='/tours/new') Add Your Tour

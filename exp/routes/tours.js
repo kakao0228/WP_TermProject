@@ -39,14 +39,18 @@ router.get('/new', needAuth, (req, res, next) => {
   res.render('tours/new', {tour: {}});
 });
 
+router.get('/reserve', needAuth, (req, res, next) => {
+  res.render('tours/reserve', {reservation: {}});
+});
+
 router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
   const tour = await Tour.findById(req.params.id);
   res.render('tours/edit', {tour: tour});
 }));
 
 router.get('/:id', catchErrors(async (req, res, next) => {
-  const tour = await Tour.findById(req.params.id).populate('author');
-  const comment = await Comment.find({tour: tour.id}).populate('author');
+  const tour = await Tour.findById(req.params.id).populate('guide');
+  const comment = await Comment.find({tour: tour.id}).populate('customer');
   tour.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
 
   await tour.save();
@@ -94,7 +98,7 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
   res.redirect('/tours');
 }));
 
-router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
+router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
   const user = req.user;
   const tour = await Tour.findById(req.params.id);
 
