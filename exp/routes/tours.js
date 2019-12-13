@@ -108,15 +108,15 @@ router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
   }
 
   var comment = new Comment({
-    author: user._id,
+    customer: user._id,
     tour: tour._id,
     content: req.body.content
   });
   await comment.save();
-  tour.numAnswers++;
+  tour.numComments++;
   await tour.save();
 
-  req.flash('success', 'Successfully posted your answer');
+  req.flash('success', 'Successfully posted your comment');
   res.redirect(`/tours/${req.params.id}`);
 }));
 

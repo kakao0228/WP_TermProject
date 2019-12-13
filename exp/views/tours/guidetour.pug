@@ -4,8 +4,23 @@ block content
   .container
     h1.main-title= tour.title
 
-    .question.show
-      .content= tour.content
+    .tour.show
+      h4 투어제목
+      .content= tour.title
+      h4 투어날짜
+      .content= tour.tourDate
+      h4 투어 1인당 가격
+      .content= tour.pricePer
+      h4 투어 시작 시간
+      .content= startTime
+      h4 투어 일정
+      .content= allTourList
+      h4 투어 포함사항
+      .content= includeTour
+      h4 투어 불포함사항
+      .content= notInclude
+      h4 투어 설명
+      .content= tourExpression
         .row
           .col-sm
             .numbers.
