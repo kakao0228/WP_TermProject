@@ -11,6 +11,7 @@ block content
       .content= tour.goTo
       h4 투어 1인당 가격
       .content= tour.pricePer
+        |  USD
       h4 투어 시작 시간
       .content= tour.startTime
       h4 투어 일정
@@ -34,9 +35,13 @@ block content
 
       if currentUser
         if currentUser.type == 'customer'
-          button.btn.btn-primary(type="button", data-toggle="modal", data-target="#exampleModal")
-            Launch Make Reservation
-          .modal.fade#exampleModal(tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+          .buttons
+            button.btn.btn-primary(type="button", data-toggle="modal", data-target="#reservation")
+              Launch Make Reservation
+            |
+            button.btn.btn-primary(type="button", data-toggle="modal", data-target="#reservationCheck")
+              Launch Check Reservation
+          .modal.fade#reservation(tabindex="-1" role="dialog" aria-labelledby="reservationLabel" aria-hidden="true")
             .modal-dialog(role="document")
               .modal-content
                 .modal-header
@@ -46,21 +51,51 @@ block content
                 .modal-body
                   form(action=`/tours/${tour.id}/reservation`, method='POST')
                     .form-group
-                      label(for='tourDate') Date
-                      input.form-control(type="text", name="tourDate", placeholder="When you want your tour?", value=reservation.tourDate)
+                      label(for='tourDate') 예약일(-로 구분하여 입력)
+                      input.form-control(type="text", name="tourDate", placeholder="YYYY-MM-DD", value=reservation.tourDate)
                     .form-group
-                      label(for='numberOfPerson') number Of Person
+                      label(for='numberOfPerson') 인원
                       input.form-control(type="text", name="numberOfPerson", placeholder="How many person?", value=reservation.numberOfPerson)
                       
                     button.btn.btn-primary(type="submit") Make Your Reservation
-      
-      .buttons
-        if currentUser
-          if tour.guide && tour.guide.id == currentUser.id || currentUser.type == "master"
+        else
+          .buttons
+            button.btn.btn-primary(type="button", data-toggle="modal", data-target="#reservationCheck")
+              Launch Check Reservation
             | 
             a.btn.btn-outline-secondary(href=`/tours/${tour.id}/edit`) Edit
             | 
             a.btn.btn-outline-danger.need-confirm-btn(href=`/tours/${tour.id}?_method=delete`) Delete
+
+        //reservation modal
+        .modal.fade#reservationCheck(tabindex="-1" role="dialog" aria-labelledby="reservationCheckLabel" aria-hidden="true")
+          .modal-dialog(role="document")
+            .modal-content
+              .modal-header
+                h5.modal-title#exampleModalLabel 예약확인
+                button.close(type="button" data-dismiss="modal" aria-label="Close")
+                  span(aria-hidden="true") &times;
+              .modal-body
+                  for reservations in reservation
+                    dl.row
+                      dt.col-sm-3 예약자
+                      dd.col-sm-9  
+                        p= reservations.name
+                      dt.col-sm-3 예약일
+                      dd.col-sm-9
+                        | #{moment(reservations.tourDate).format('YYYY-MM-DD')}
+                      dt.col-sm-3 인원
+                      dd.col-sm-9  
+                        p= reservations.numberOfPerson
+                      dt.col-sm-3 총 금액
+                      dd.col-sm-9
+                        p= (tour.pricePer * reservations.numberOfPerson) + "USD"
+                    hr
+                      //- .buttons
+                      //-   if currentUser.type != customer
+                      //-     a.btn.btn-outline-secondary.btn-sm(href=`/tours/${tour.id}/${reservation.id}/edit`) Edit
+                      //-     |
+                      //-   a.btn.btn-outline-danger.need-confirm-btn.btn-sm(href=`/tours/${tour.id}/${reservation.id}?_method=delete`) Delete 
       
     if tour.numComments > 0
       hr

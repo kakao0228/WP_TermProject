@@ -1,12 +1,10 @@
 extends layout
 
 block content
-  .jumbotron.jumbotron-fluid
-    .container
-      .row.justify-content-center
-        h1.display-4 당신의 여행지를 입력하세요!
-        .hidden ssss
-        .row.justify-content-center
-          form.form-inline.my-2.my-lg-0
-            input.form-control.mr-sm-2(type="search" placeholder="Search" aria-label="Search")
-            button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Search
+  .row.justify-content-center
+    .col-7
+      .card
+        .card-body
+          h5.card-title Welcome!
+          p.card-text Let's explore guide tour with world-wide friends!
+          a.btn.btn-primary.btn-lg(href="/tours" role="button") Go To Tour List

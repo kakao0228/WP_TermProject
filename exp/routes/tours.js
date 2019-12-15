@@ -48,12 +48,26 @@ router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
 router.get('/:id', catchErrors(async (req, res, next) => {
   const tour = await Tour.findById(req.params.id).populate('guide');
   const comment = await Comment.find({tour: tour.id}).populate('customer');
-  const reservation = await Reservation.find({tour: tour.id}).populate('guide');
-  tour.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
+  const reservation = await Reservation.find({tour: tour.id}).populate('tour');
+  tour.numReads++;
 
   await tour.save();
   res.render('tours/guidetour', {tour: tour, comments: comment, reservation: reservation});
 }));
+
+// router.put('/:tourId/:reservationId', catchErrors(async (req, res, next) => {
+//   const reservation = await Reservation.findById(req.params.id);
+//   if(!reservation) {
+//     req.flash('danger', 'Not exist reservation');
+//     return res.redirect('back');
+//   }
+//   reservation.tourDate = req.body.tourDate;
+//   reservation.numberOfPerson = req.body.numberOfPerson;
+
+//   await reservation.save();
+//   req.flash('success', 'Succesfully updated');
+//   req.redirect('back');
+// }));
 
 router.put('/:id', catchErrors(async (req, res, next) => {
   const tour = await Tour.findById(req.params.id);
@@ -68,13 +82,20 @@ router.put('/:id', catchErrors(async (req, res, next) => {
   tour.pricePer = req.body.pricePer;
   //img: {type: String}
   tour.startTime = req.body.startTime;
-  tour.allTourList = req.body.allTourList.split(" ").map(e => e.trim()),
+  tour.allTourList = req.body.allTourList.split(",").map(e => e.trim()),
   tour.tourExpression = req.body.tourExpression;
 
   await tour.save();
   req.flash('success', 'Successfully updated');
   res.redirect('/tours');
 }));
+
+// router.delete('/:tourId/:reservationId', needAuth, catchErrors(async (req, res, next) => {
+//   console.log(req.params);
+//   await Reservation.findOneAndRemove({_id: req.params.id});
+//   req.flash('success', 'Successfully deleted');
+//   res.redirect('back');
+// }));
 
 router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
   await Tour.findOneAndRemove({_id: req.params.id});
@@ -92,7 +113,7 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     pricePer: req.body.pricePer,
     //img: {type: String},
     startTime: req.body.startTime,
-    allTourList: req.body.allTourList.split(" ").map(e => e.trim()),
+    allTourList: req.body.allTourList.split(",").map(e => e.trim()),
     tourExpression: req.body.tourExpression
   });
   await tour.save();
@@ -103,9 +124,9 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
 router.post('/:id/reservation', needAuth, catchErrors(async (req, res, next) => {
   const user = req.user;
   const tour = await Tour.findById(req.params.id);
-
-  console.log(user._id)
   
+  console.log(req.user);
+
   if (!tour) {
     req.flash('danger', 'Not exist guide tour');
     return res.redirect('back');
@@ -113,6 +134,7 @@ router.post('/:id/reservation', needAuth, catchErrors(async (req, res, next) => 
 
   var reservation = new Reservation({
     customer: user._id,
+    name: user.name,
     tour: tour._id,
     tourDate: req.body.tourDate,
     numberOfPerson: req.body.numberOfPerson

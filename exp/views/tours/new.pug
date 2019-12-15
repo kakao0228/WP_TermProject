@@ -14,14 +14,14 @@ block content
         label(for="simpleContent") Simple Expression Your Guide Tour
         input.form-control(type="text", name="simpleContent", placeholder="Simple Expression for user", value=tour.simpleContent)
       .form-group
-        label(for="pricePer") Price per Person
+        label(for="pricePer") Price per Person(Unit: USD)
         input.form-control(type="text", name="pricePer", placeholder="How much is your guide tour fee?", value=tour.pricePer)
       .form-group#list
         label(for="startTime") Tour Start Time
         input.form-control(type="text", name="startTime", placeholder="When you start your tour?", value=tour.startTime)
       .form-group
-        label(for="allTourList") Tour List
-        input.form-control(type="text", name="allTourList", placeholder="tour course separated by spaces", value=tour.allTourList ? tour.allTourList.join(" ") : "")
+        label(for="allTourList") Tour List(seperated by ",")
+        input.form-control(type="text", name="allTourList", placeholder="tour course separated by ,", value=tour.allTourList ? tour.allTourList.join(",") : "")
       .form-group
         label(for="tourExpression") Guide Tour
         textarea.form-control(name="tourExpression", rows="10")= tour.tourExpression
