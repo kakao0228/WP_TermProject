@@ -33,15 +33,15 @@ block content
 
     // 가이드인 경우 개설한 상품 내역
     if user.type == 'guide' || 'master'
-    p 상품 목록
-      for tours in tour
-        dl.row
-          dt.col-sm-3 Title
-          dd.col-sm-9  
-            a(href=`/tours/${tours.id}`)= tours.title
-          dt.col-sm-3 Simple Expression
-          dd.col-sm-9  
-            p= tours.simpleContent
+      p 상품 목록
+        for tours in tour
+          dl.row
+            dt.col-sm-3 Title
+            dd.col-sm-9  
+              a(href=`/tours/${tours.id}`)= tours.title
+            dt.col-sm-3 Simple Expression
+            dd.col-sm-9  
+              p= tours.simpleContent
           
 
 

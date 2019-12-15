@@ -7,20 +7,19 @@ block content
     .tour.show
       h4 투어제목
       .content= tour.title
-      h4 투어날짜
-      .content= tour.tourDate
+      h4 위치
+      .content= tour.goTo
       h4 투어 1인당 가격
       .content= tour.pricePer
       h4 투어 시작 시간
-      .content= startTime
+      .content= tour.startTime
       h4 투어 일정
-      .content= allTourList
-      h4 투어 포함사항
-      .content= includeTour
-      h4 투어 불포함사항
-      .content= notInclude
+      .content
+        ul.list-group.list-group-flush
+          each item in tour.allTourList
+            li.list-group-item= item
       h4 투어 설명
-      .content= tourExpression
+      .content= tour.tourExpression
         .row
           .col-sm
             .numbers.
@@ -35,7 +34,25 @@ block content
 
       if currentUser
         if currentUser.type == 'customer'
-          //예약폼 그냥 안에다 때려 넣자
+          button.btn.btn-primary(type="button", data-toggle="modal", data-target="#exampleModal")
+            Launch Make Reservation
+          .modal.fade#exampleModal(tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+            .modal-dialog(role="document")
+              .modal-content
+                .modal-header
+                  h5.modal-title#exampleModalLabel 예약
+                  button.close(type="button" data-dismiss="modal" aria-label="Close")
+                    span(aria-hidden="true") &times;
+                .modal-body
+                  form(action=`/tours/${tour.id}/reservation`, method='POST')
+                    .form-group
+                      label(for='tourDate') Date
+                      input.form-control(type="text", name="tourDate", placeholder="When you want your tour?", value=reservation.tourDate)
+                    .form-group
+                      label(for='numberOfPerson') number Of Person
+                      input.form-control(type="text", name="numberOfPerson", placeholder="How many person?", value=reservation.numberOfPerson)
+                      
+                    button.btn.btn-primary(type="submit") Make Your Reservation
       
       .buttons
         if currentUser

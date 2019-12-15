@@ -30,13 +30,10 @@ block content
               .col-sm
                 .guide
                   | Posted #{moment(tour.createdAt).format('YYYY-MM-DD')}
-                  if tour.guide
-                    | 
-                    | by #[a(href=`/users/${tour.guide.id}`)= tour.guide.name] 
             hr
 
       +paginate(tours, '/tours', query)
       
     if currentUser
-      if currentUser.type == "guide" || "master"
+      if currentUser.type == "guide"
         a.btn.btn-primary(href='/tours/new') Add Your Tour
