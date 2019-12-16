@@ -19,20 +19,23 @@ block content
 
     hr
     // 고객인 경우 예약내역
-    //- if user.type == 'customer'
-    //-   p 예약 목록
-    //-   for tours in tour
-    //-     dl.row
-    //-       dt.col-sm-3 Title
-    //-       dd.col-sm-9  
-    //-         a(href=`/tours/${tours.id}`)= tours.title
-    //-       dt.col-sm-3 Simple Expression
-    //-       dd.col-sm-9  
-    //-         p= tours.simpleContent
+    if user.type == 'customer'
+      p 예약 목록
+      for reservations in reservation
+        dl.row
+          dt.col-sm-3 Title
+          dd.col-sm-9  
+            a(href=`/tours/${reservations.tour.id}`) 예약상품 상세보기
+          dt.col-sm-3 예약인원
+          dd.col-sm-9  
+            p= reservations.numberOfPerson
+          dt.col-sm-3 날짜
+          dd.col-sm-9
+            | #{moment(reservations.tourDate).format('YYYY-MM-DD')}
 
 
     // 가이드인 경우 개설한 상품 내역
-    if user.type == 'guide' || 'master'
+    if user.type == 'guide'
       p 상품 목록
         for tours in tour
           dl.row

@@ -19,10 +19,10 @@ html(lang="ko")
           form.form-inline
             a.btn.btn-outline-success(href="/login" role="button" aria-pressed="true") Log-in
             .hidden aaa
-            a.btn.btn-outline-success(href="users/new" role="button" aria-pressed="true") Sign-up
+            a.btn.btn-outline-success(href="/users/new" role="button" aria-pressed="true") Sign-up
         else
           form.form-inline
-            a.btn.btn-outline-success(href=`users/${currentUser.id}` role="button" aria-pressed="true") Profile
+            a.btn.btn-outline-success(href=`/users/${currentUser.id}` role="button" aria-pressed="true") Profile
             .hidden aaa
             a.btn.btn-outline-success(href="/logout" role="button" aria-pressed="true") Log-out
 
