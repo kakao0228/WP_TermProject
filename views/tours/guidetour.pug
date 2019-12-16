@@ -56,11 +56,11 @@ block content
                       
                     button.btn.btn-primary(type="submit") Make Your Reservation
         else
-          .buttons
-            button.btn.btn-primary(type="button", data-toggle="modal", data-target="#reservationCheck")
-              Launch Check Reservation
-            | 
+          .buttons 
             if currentUser.id == tour.guide.id || currentUser.type == "master"
+              button.btn.btn-primary(type="button", data-toggle="modal", data-target="#reservationCheck")
+                Launch Check Reservation
+              |
               a.btn.btn-outline-secondary(href=`/tours/${tour.id}/edit`) Edit
               | 
               a.btn.btn-outline-danger.need-confirm-btn(href=`/tours/${tour.id}?_method=delete`) Delete
